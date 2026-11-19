@@ -14,3 +14,12 @@ export const findCustomerByEmail = async (email) => {
 
   return result.rows[0] ?? null;
 };
+
+// This version uses the transaction's database client.
+export const findCustomerByIdWithClient = async (client, id) => {
+  const result = await client.query("SELECT * FROM customers WHERE id = $1", [
+    id,
+  ]);
+
+  return result.rows[0] ?? null;
+};
